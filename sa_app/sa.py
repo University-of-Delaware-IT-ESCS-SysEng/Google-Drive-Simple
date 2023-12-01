@@ -1,9 +1,9 @@
 from __future__ import print_function
 
 """
-Figure out sharingUser and how it can be used.
-
-The drive API.
+Simple program that does a Google Drive API drive.list() call
+using the query "me" in owners.  This should return all files a
+user owns.  Does it?  Let's see.
 """
 
 import sys

@@ -17,7 +17,7 @@ from googleapiclient import errors
 import googleapiclient
 import oauth2client
 
-USER='mike@udel.edu'
+USER='chryskar@udel.edu'
 keys = '/usr/local/keys/ga-g-suite-administration-0357ee3510c2.json'
 
 scopes = [
@@ -62,6 +62,7 @@ def list():
     args[ 'q' ] = '"me" in owners'
     args[ 'fields' ] = 'nextPageToken,files(' + fields + ')'
     args[ 'spaces' ] = 'drive,appDataFolder'
+    args[ 'pageSize' ] = 1000
 
     print( "Basic args: %s" % args, file=sys.stderr )
 

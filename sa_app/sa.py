@@ -61,15 +61,18 @@ def list():
     args = {}
     args[ 'q' ] = '"me" in owners'
     args[ 'fields' ] = 'nextPageToken,files(' + fields + ')'
-    args[ 'spaces' ] = 'drive,appDataFolder,photos'
+    args[ 'spaces' ] = 'drive,appDataFolder'
 
     print( "Basic args: %s" % args, file=sys.stderr )
 
     while True:
         v = drive_service.files().list( **args ).execute()
         for f in v[ 'files' ]:
-            d = { f[ 'id' ]:  f }           # Makes working with Unix text tools easy
-            json.dump( d, sys.stdout,
+
+            # Makes working with Unix text tools easy
+
+            print( '"%s":' % f[ 'id' ], end='' )
+            json.dump( f, sys.stdout,
                         sort_keys=False,
                         check_circular=False,
                         indent=None,

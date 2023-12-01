@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Dynamic startup script
+sa
+
 # Distribution / packaging
 .Python
 build/

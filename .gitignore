@@ -8,6 +8,7 @@ __pycache__/
 
 # Dynamic startup script
 sa
+sa-r
 
 # Distribution / packaging
 .Python

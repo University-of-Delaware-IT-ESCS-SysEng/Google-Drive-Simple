@@ -10,6 +10,7 @@ import pprint
 import httplib2
 import oauth2client
 import json
+from collections import deque
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
 from googleapiclient import errors
@@ -27,6 +28,8 @@ scopes = [
     'https://www.googleapis.com/auth/drive.photos.readonly',
 ]
 
+_FOLDER_MT = 'application/vnd.google-apps.folder'
+
 def connect():
 
     undelegated_credentials = (
@@ -43,6 +46,8 @@ def list():
 
     fields = ( 'mimeType,id,name,trashed,explicitlyTrashed'
         ',parents'
+        ',owners(permissionId,emailAddress)'
+        ',ownedByMe'
         ',md5Checksum'
         ',sharingUser(permissionId,emailAddress,me)'
         ',shared'
@@ -58,7 +63,6 @@ def list():
     drive_service = connect()
 
     args = {}
-    args[ 'q' ] = '"me" in owners'
     args[ 'fields' ] = 'nextPageToken,files(' + fields + ')'
     args[ 'spaces' ] = 'drive,appDataFolder'
     args[ 'pageSize' ] = 1000
@@ -66,24 +70,51 @@ def list():
     print( "Working on user: %s" % USER, file=sys.stderr )
     print( "Basic args: %s" % args, file=sys.stderr )
 
-    while True:
-        v = drive_service.files().list( **args ).execute()
-        for f in v[ 'files' ]:
+    dirs = deque()
+    dirs.append( 'root' )
 
-            # Makes working with Unix text tools easy
+#
+# Build something like ('id1' in parents or 'id2' in parents) maxed at 50.
+# this does slightly complicate the program, but the speed up is truly
+# dramatic and the code isn't all that complicated.
+#
 
-            print( '"%s":' % f[ 'id' ], end='' )
-            json.dump( f, sys.stdout,
-                        sort_keys=False,
-                        check_circular=False,
-                        indent=None,
-                        separators=(',', ':') )
-            print( '' )                     # One line per file
+    while dirs:
+        MAX_PARENTS = 50
 
-        try:
-            args[ 'pageToken' ] = v[ 'nextPageToken' ]
-        except KeyError:
-            break
+        parents = '('
+        for i in range( min( len( dirs ), MAX_PARENTS ) ):
+            dir = dirs.popleft()
+            parents += f"'{dir}' in parents or "
+        parents = parents[0:-4]             # Get rid of trailing " or "
+        parents += ')'                      # Close query
+
+        args[ 'q' ] = parents
+
+        while True:
+            v = drive_service.files().list( **args ).execute()
+            for f in v[ 'files' ]:
+                if f[ 'mimeType' ] == _FOLDER_MT:
+                    dirs.append( f[ 'id' ] )
+
+                # Makes working with Unix text tools easy
+
+                print( '"%s":' % f[ 'id' ], end='' )
+                json.dump( f, sys.stdout,
+                            sort_keys=False,
+                            check_circular=False,
+                            indent=None,
+                            separators=(',', ':') )
+                print( '' )                     # One line per file
+
+            # End of files for loop
+
+            try:
+                args[ 'pageToken' ] = v[ 'nextPageToken' ]
+            except KeyError:
+                break
+        # End of paging loop for a files().list call series on set of parents
+    # End of loop that processes all located directories
 
 list()
 

@@ -86,10 +86,14 @@ def list():
         for i in range( min( len( dirs ), MAX_PARENTS ) ):
             dir = dirs.popleft()
             parents += f"'{dir}' in parents or "
-        parents = parents[0:-4]             # Get rid of trailing " or "
-        parents += ')'                      # Close query
+        parents = parents[0:-4]         # Get rid of trailing " or "
+        parents += ')'                  # Close query
 
         args[ 'q' ] = parents
+        try:                            # Could be left over from prior list
+            del args[ 'pageToken' ]
+        except KeyError:
+            pass
 
         while True:
             v = drive_service.files().list( **args ).execute()

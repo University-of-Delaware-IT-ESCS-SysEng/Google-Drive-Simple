@@ -9,6 +9,8 @@ __pycache__/
 # Dynamic startup script
 sa
 sa-r
+# We want to avoid anyone uploading json br accident.
+*.json
 
 # Distribution / packaging
 .Python

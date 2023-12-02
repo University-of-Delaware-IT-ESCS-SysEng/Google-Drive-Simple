@@ -102,6 +102,18 @@ include files owned by others if present.  So, you if you compare
 the file ids from './sa', you will need to exclude those with
 `"ownedByMe":true`.  `fgrep -v` or similar can do this.
 
+## Basic setup
+
+The best place to find setup directions for a non-authorized setup
+is [here](https://developers.google.com/drive/api/quickstart/python).
+
+Basically:
+
+- Create a Google Cloud project.
+- Enable Google Drive API
+- Enable the application
+- Get credentials
+
 ## Discussion
 
 **sa-r** should return the same set of files that **sa** does,

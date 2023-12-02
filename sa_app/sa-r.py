@@ -63,7 +63,7 @@ def list():
     args[ 'spaces' ] = 'drive,appDataFolder'
     args[ 'pageSize' ] = 1000
 
-    print( "Working on user: %s" % USER )
+    print( "Working on user: %s" % USER, file=sys.stderr )
     print( "Basic args: %s" % args, file=sys.stderr )
 
     while True:

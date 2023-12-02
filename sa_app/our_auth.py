@@ -15,7 +15,7 @@ import oauth2client
 
 USER=sys.argv[ 1 ]
 KEYS = '/usr/local/keys/ga-g-suite-administration-0357ee3510c2.json'
-KEYS = ''
+#KEYS = ''
 
 scopes = [
     'https://www.googleapis.com/auth/drive.readonly',

@@ -13,7 +13,6 @@ from googleapiclient import errors
 import googleapiclient
 import oauth2client
 
-USER=sys.argv[ 1 ]
 KEYS = '/usr/local/keys/ga-g-suite-administration-0357ee3510c2.json'
 KEYS = ''
 
@@ -32,6 +31,8 @@ def our_connect():
         o2_credentials = flow.run_local_server( port = 0 )
         drive_service = build( 'drive', 'v3', credentials=o2_credentials )
     else:
+        USER=sys.argv[ 1 ]
+
         undelegated_credentials = (
             ServiceAccountCredentials.from_json_keyfile_name(
             KEYS, scopes=scopes ) )

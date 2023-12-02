@@ -65,6 +65,18 @@ https://www.googleapis.com/auth/drive.appdata
 ```
 There is no readonly version of *drive.appdata* that I know of.
 
+## Basic setup
+
+The best place to find setup directions for a non-authorized setup
+is [here](https://developers.google.com/drive/api/quickstart/python).
+
+Basically:
+
+- Create a Google Cloud project.
+- Enable Google Drive API
+- Enable the application
+- Get credentials
+
 ## Installing
 
 There is no installation procedure.  Run the code in the main
@@ -101,18 +113,6 @@ to get a list of files based from My Drive.  Note that this will
 include files owned by others if present.  So, you if you compare
 the file ids from './sa', you will need to exclude those with
 `"ownedByMe":true`.  `fgrep -v` or similar can do this.
-
-## Basic setup
-
-The best place to find setup directions for a non-authorized setup
-is [here](https://developers.google.com/drive/api/quickstart/python).
-
-Basically:
-
-- Create a Google Cloud project.
-- Enable Google Drive API
-- Enable the application
-- Get credentials
 
 ## Discussion
 

@@ -84,14 +84,20 @@ directory or supply a path to the scripts.
 
 ## Configuration
 
-At this time, the path to a set of authorized credentials is required.
-Set the path in the `sa_app/our_auth.py` module.  These would be
+At this time, the path to a set of authorized credentials can be
+used or you can follow the basic application setup steps above.
+This document will not cover how to create credentials that allow
+impersonation.  If you use GAM, for instance, those credentials
+would work.  Set the path in the `sa_app/our_auth.py` module if you
+want to use credentials that allow impersonation.  These would be
 credentials similar to what you use to run **GAM**, for instance.
 
-Later on today, most likely, I will add code that allows for
-local authentication so that those of you who do not want to
-supply privileged keys will not need to.  Of course, you will
-then need to be able to login to the accounts under test.
+If you do not set such credentials, you must run the program
+locally and will be prompted to authorization the application on
+your web browser.
+
+The default distribution assumes authorized credentials, so change
+the path for `KEYS` to `''` in the `sa_app/our_auth.py` module.
 
 ## Running the programs
 
@@ -113,6 +119,8 @@ to get a list of files based from My Drive.  Note that this will
 include files owned by others if present.  So, you if you compare
 the file ids from './sa', you will need to exclude those with
 `"ownedByMe":true`.  `fgrep -v` or similar can do this.
+
+> Specifying a user does nothing if you are using local authentication and is not required.  The code will run for whatever account you authorized via the web browser.
 
 ## Discussion
 

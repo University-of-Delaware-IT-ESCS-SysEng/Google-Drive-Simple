@@ -11,4 +11,4 @@ make bin
 
 Edit sa_app/sa.py and set the user to run against and the path to your credentials.
 
-Run ./sa > my.json  to get the list of files.
+Run ./sa theuser@yourschool.edu > my.json  to get the list of files.

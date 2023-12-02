@@ -1,9 +1,8 @@
 from __future__ import print_function
 
 """
-Simple program that does a Google Drive API drive.list() call
-using the query "me" in owners.  This should return all files a
-user owns.  Does it?  Let's see.
+Future program that will do a recursive list of
+the user's My Drive.
 """
 
 import sys

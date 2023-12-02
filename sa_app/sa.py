@@ -8,37 +8,10 @@ user owns.  Does it?  Let's see.
 
 import sys
 import pprint
-import httplib2
-import oauth2client
+from sa_app.our_auth import our_connect
 import json
-from oauth2client.service_account import ServiceAccountCredentials
-from googleapiclient.discovery import build
 from googleapiclient import errors
 import googleapiclient
-import oauth2client
-
-USER=sys.argv[ 1 ]
-keys = '/usr/local/keys/ga-g-suite-administration-0357ee3510c2.json'
-
-scopes = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/drive.appdata',
-    'https://www.googleapis.com/auth/drive.metadata',
-    'https://www.googleapis.com/auth/drive.photos.readonly',
-]
-
-def connect():
-
-    undelegated_credentials = (
-        ServiceAccountCredentials.from_json_keyfile_name(
-        keys, scopes=scopes ) )
-    o2_credentials = undelegated_credentials.create_delegated( USER )
-    http = httplib2.Http()
-    o2_credentials.authorize( http )
-    drive_service = build( 'drive', 'v3', http=http )
-
-    return( drive_service )
 
 def list():
 
@@ -56,7 +29,7 @@ def list():
         ',shortcutDetails(*)'
         ',webViewLink' )
 
-    drive_service = connect()
+    drive_service = our_connect()
 
     args = {}
     args[ 'q' ] = '"me" in owners'
@@ -64,7 +37,6 @@ def list():
     args[ 'spaces' ] = 'drive,appDataFolder'
     args[ 'pageSize' ] = 1000
 
-    print( "Working on user: %s" % USER, file=sys.stderr )
     print( "Basic args: %s" % args, file=sys.stderr )
 
     while True:

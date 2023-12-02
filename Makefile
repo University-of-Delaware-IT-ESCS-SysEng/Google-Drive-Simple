@@ -3,6 +3,7 @@ BASEFILER=sa-r
 BASE_PYTHON=python3.11
 
 MODULES=sa_app/drive.py \
+sa_app/our_auth.py
 
 bin:
 	echo '#!/bin/bash' > ${BASEFILE}

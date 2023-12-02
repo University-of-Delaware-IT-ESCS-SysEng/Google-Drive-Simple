@@ -22,7 +22,7 @@ may suggest a deteriorating situation.  However, this has not been proved
 yet.
 
 The code is somewhat problematic because it can be difficult to
-get a large file list from a big account without error handled.
+get a large file list from a big account without error handling.
 However, I have removed all error handling because Google won't
 be able to claim the non-existent error handling is incorrect.
 Time will tell if error handling will be required and Google
@@ -36,6 +36,8 @@ Who knows what Google will say.
 Download like you would any git repository.
 
 ## Setting up the Environment
+
+In the Makefile, set your python executable name.
 
 This application uses a Python environment that is dynamically built.
 So long as you have a Python3 installation, this code should work.
@@ -52,12 +54,21 @@ make bin
 If you change the location of the program, you may need to redo the
 `make bin` step.
 
+## Security
+
+The following scopes are used:
+
+```
+https://www.googleapis.com/auth/drive.readonly
+https://www.googleapis.com/auth/drive.metadata.readonly
+https://www.googleapis.com/auth/drive.appdata
+```
+There is no readonly version of *drive.appdata* that I know of.
+
 ## Installing
 
 There is no installation procedure.  Run the code in the main
 directory or supply a path to the scripts.
-
-In Makefile, set your python executable name.
 
 ## Configuration
 

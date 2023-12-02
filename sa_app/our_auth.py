@@ -16,11 +16,10 @@ USER=sys.argv[ 1 ]
 KEYS = '/usr/local/keys/ga-g-suite-administration-0357ee3510c2.json'
 
 scopes = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/drive.appdata',
-    'https://www.googleapis.com/auth/drive.metadata',
-    'https://www.googleapis.com/auth/drive.photos.readonly',
+    'https://www.googleapis.com/auth/drive.readonly',
+    'https://www.googleapis.com/auth/drive.metadata.readonly',
+# There is no readonly version of this scope that I know of
+    'https://www.googleapis.com/auth/drive.appdata'
 ]
 
 def our_connect():

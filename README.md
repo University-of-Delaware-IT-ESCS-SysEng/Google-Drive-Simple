@@ -76,6 +76,7 @@ Basically:
 - Enable Google Drive API
 - Enable the application
 - Get credentials
+- Put the credentials in a file called `credentials.json` in the directory you are running from. (Yuck.  Whatever. Send me a patch.)
 
 ## Installing
 
@@ -93,8 +94,8 @@ want to use credentials that allow impersonation.  These would be
 credentials similar to what you use to run **GAM**, for instance.
 
 If you do not set such credentials, you must run the program
-locally and will be prompted to authorization the application on
-your web browser.
+locally and will be prompted to authorize the application on your
+web browser.
 
 The default distribution assumes authorized credentials, so change
 the path for `KEYS` to `''` in the `sa_app/our_auth.py` module.

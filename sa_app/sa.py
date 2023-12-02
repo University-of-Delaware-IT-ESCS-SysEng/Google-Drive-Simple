@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 """
 Simple program that does a Google Drive API drive.list() call
 using the query "me" in owners.  This should return all files a

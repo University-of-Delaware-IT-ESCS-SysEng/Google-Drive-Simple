@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 """
 Future program that will do a recursive list of
 the user's My Drive.

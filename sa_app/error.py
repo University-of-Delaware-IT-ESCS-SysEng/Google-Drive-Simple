@@ -27,7 +27,7 @@ def error_handler( e ):
     """
 
     try:
-        error = json.loads( e.context )
+        error = json.loads( e.content )
     except ValueError:              # Error that is not JSON.
         return( False )
 

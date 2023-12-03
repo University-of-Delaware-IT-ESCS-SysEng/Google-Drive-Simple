@@ -147,4 +147,24 @@ Traceback (most recent call last):
 googleapiclient.errors.HttpError: <HttpError 500 when requesting https://www.googleapis.com/drive/v3/files?q=%22me%22+in+owners&fields=nextPageToken%2Cfiles%28mimeType%2Cid%2Cname%2Ctrashed%2CexplicitlyTrashed%2Cparents%2Cmd5Checksum%2CsharingUser%28permissionId%2CemailAddress%2Cme%29%2Cshared%2CcreatedTime%2CmodifiedTime%2CmodifiedByMeTime%2CtrashingUser%28emailAddress%29%2CtrashedTime%2Csize%2CshortcutDetails%28%2A%29%2CwebViewLink%29&spaces=drive%2CappDataFolder&pageSize=1000&pageToken=~%21%21~AI9FV7RutP00ibTMGkkacjK6ZSCaGvyGuo3-JYgOHnKfi5Sh8C1j_HFT1fVfIwHb5cBKi4r1hLzCIlVtqzELyB40e2-VfWgK1WtGH9m-bqlODDl8ZpuGJntNmN-1wNmxxpUV_sKwXmqpaM6pBjBV36kAQ0L253tI8yHO5lPAiyZTF4WuNWlnt7sahXY8CbOUK544MOly3O7LuNRZJmvYwyB_XBhBWY9mmcY7YiHCBYCzuI_8OteM12h7-DaaWiXqdnJ0-NUGjLstTNDKM0pRR8l4yqO90u5xjUxK0H_zAhT-kTveFZu_wGbqW0MTrNK7XiJ8DzPKeEyygoJD67v56JBkDYEwXEVRbg%3D%3D&alt=json returned "Internal Error". Details: "[{'message': 'Internal Error', 'domain': 'global', 'reason': 'internalError'}]">
 ```
 
+And another
+
+```
+Basic args: {'fields': 'nextPageToken,files(mimeType,id,name,trashed,explicitlyTrashed,parents,owners(permissionId,emailAddress),ownedByMe,md5Checksum,sharingUser(permissionId,emailAddress,me),shared,createdTime,modifiedTime,modifiedByMeTime,trashingUser(emailAddress),trashedTime,size,shortcutDetails(*),webViewLink)', 'spaces': 'drive,appDataFolder', 'pageSize': 1000}
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib64/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/mike/src/Google-Drive-Simple/sa_app/sa_r.py", line 96, in <module>
+    list()      # Run the program.
+  File "/home/mike/src/Google-Drive-Simple/sa_app/sa_r.py", line 72, in list
+    v = drive_service.files().list( **args ).execute()
+  File "/home/mike/src/Google-Drive-Simple/env/lib64/python3.9/site-packages/googleapiclient/_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/mike/src/Google-Drive-Simple/env/lib64/python3.9/site-packages/googleapiclient/http.py", line 938, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 500 when requesting https://www.googleapis.com/drive/v3/files returned "Internal Error". Details: "[{'message': 'Internal Error', 'domain': 'global', 'reason': 'internalError'}]">
+```
+
 Clearly we are going to need an error handler.  The Google APIs are not robust enough.  If not restartable, then Google has an issue since we can't audit what they are charging us for.

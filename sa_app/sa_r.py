@@ -75,7 +75,7 @@ def list():
                     v = drive_service.files().list( **args ).execute()
                     break               # API call worked-ish
                 except googleapiclient.errors.HttpError as e:
-                    r = error.error_handler( e )
+                    r = sa_app.error.error_handler( e )
                     if not r:
                         raise           # Program exit
                     else:

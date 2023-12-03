@@ -21,15 +21,7 @@ that has far more missing files now than it ever did in the past.  This
 may suggest a deteriorating situation.  However, this has not been proved
 yet.
 
-The code is somewhat problematic because it can be difficult to
-get a large file list from a big account without error handling.
-However, I have removed all error handling because Google won't
-be able to claim the non-existent error handling is incorrect.
-Time will tell if error handling will be required and Google
-will either need to provide guidance on what the proper error
-handling is, or if indeed error handling can even be used in a
-multipage listing.  Maybe large lists of files are just broken.
-Who knows what Google will say.
+We had to add an error handler.  See below.
 
 ## Downloading
 
@@ -135,6 +127,8 @@ on this user's path from **My Drive**.
 
 ## Errors
 
+Error handler added.
+
 ```
 Basic args: {'q': '"me" in owners', 'fields': 'nextPageToken,files(mimeType,id,name,trashed,explicitlyTrashed,parents,md5Checksum,sharingUser(permissionId,emailAddress,me),shared,createdTime,modifiedTime,modifiedByMeTime,trashingUser(emailAddress),trashedTime,size,shortcutDetails(*),webViewLink)', 'spaces': 'drive,appDataFolder', 'pageSize': 1000}
 Traceback (most recent call last):
@@ -167,4 +161,6 @@ Traceback (most recent call last):
 googleapiclient.errors.HttpError: <HttpError 500 when requesting https://www.googleapis.com/drive/v3/files returned "Internal Error". Details: "[{'message': 'Internal Error', 'domain': 'global', 'reason': 'internalError'}]">
 ```
 
-Clearly we are going to need an error handler.  The Google APIs are not robust enough.  If not restartable, then Google has an issue since we can't audit what they are charging us for.
+Clearly we needed an error handler.  The Google APIs are not
+robust enough.  If not restartable, then Google has an issue
+since we can't audit what they are charging us for.

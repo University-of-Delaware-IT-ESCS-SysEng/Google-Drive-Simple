@@ -10,6 +10,7 @@ from sa_app.our_auth import our_connect
 import json
 from googleapiclient import errors
 import googleapiclient
+import sa_app.error
 
 def list():
 
@@ -38,7 +39,18 @@ def list():
     print( "Basic args: %s" % args, file=sys.stderr )
 
     while True:
-        v = drive_service.files().list( **args ).execute()
+        while True:
+            try:
+                v = drive_service.files().list( **args ).execute()
+                break               # API call worked-ish
+            except googleapiclient.errors.HttpError as e:
+                r = error.error_handler( e )
+                if not r:
+                    raise           # Program exit
+                else:
+                    print( "ERROR: Retrying args %s" % args, file=sys.stderr )
+                    pass            # Will redo the same call with same args
+
         for f in v[ 'files' ]:
 
             # Makes working with Unix text tools easy

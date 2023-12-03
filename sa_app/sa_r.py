@@ -13,6 +13,7 @@ from googleapiclient import errors
 import googleapiclient
 
 from sa_app.our_auth import our_connect
+import sa_app.error
 
 _FOLDER_MT = 'application/vnd.google-apps.folder'
 
@@ -69,7 +70,18 @@ def list():
             pass
 
         while True:
-            v = drive_service.files().list( **args ).execute()
+            while True:
+                try:
+                    v = drive_service.files().list( **args ).execute()
+                    break               # API call worked-ish
+                except googleapiclient.errors.HttpError as e:
+                    r = error.error_handler( e )
+                    if not r:
+                        raise           # Program exit
+                    else:
+                        print( "ERROR: Retrying args %s" % args,file=sys.stderr)
+                        pass            # Will redo the same call with same args
+
             for f in v[ 'files' ]:
                 if f[ 'mimeType' ] == _FOLDER_MT:
                     dirs.append( f[ 'id' ] )

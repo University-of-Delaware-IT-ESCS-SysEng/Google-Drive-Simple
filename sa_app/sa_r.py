@@ -52,6 +52,9 @@ def list():
 # this does slightly complicate the program, but the speed up is truly
 # dramatic and the code isn't all that complicated.
 #
+# This idea was found in the web page documentation for rclone where
+# they discuss rclone from/to Google Drive.
+#
 
     while dirs:
         MAX_PARENTS = 50

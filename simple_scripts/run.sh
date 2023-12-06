@@ -33,6 +33,7 @@ LOGS='./gd-run/logs'
 #
 
 MAX=3
+echo Running ${MAX} scripts in parallel.
 
 mkdir -p ${IN}
 

@@ -1,6 +1,5 @@
 """
-Future program that will do a recursive list of
-the user's My Drive.
+Program that will do a recursive list of the user's My Drive.
 """
 
 import sys

@@ -10,13 +10,18 @@
 # Simple but it works.  And it restarts.
 # Best run on a system you have control over.
 #
+# Modify script 'doit.sh' to control what
+# actually runs.
+#
 
-CMD='/home/mike/work/gd-run/doit.sh'
-IN='/home/mike/work/gd-run/in'
-OUT='/home/mike/work/gd-run/out'
-RUNNING='/home/mike/work/gd-run/running'
-LOGS='/home/mike/work/gd-run/logs'
+CMD='./doit.sh'
+IN='./gd-run/in'
+OUT='./gd-run/out'
+RUNNING='./gd-run/running'
+LOGS='./gd-run/logs'
 MAX=75
+
+mkdir -p ${IN}
 
 while true; do
     active=`ps auxww | fgrep "${CMD}" | wc -l`

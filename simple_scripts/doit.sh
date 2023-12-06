@@ -1,14 +1,38 @@
 #!/bin/bash
 #
+# This script is designed to be run from run.sh
+#
 # Args:
 #   user
 #   source-queue-file
 #   destination folder to move source-queue-file to when done.
 
-echo Starting ${1}
+GDUSER=${1}
+echo Starting ${GDUSER}
 
-#/home/mike/bin/gd-json-only.sh ${1}
-/home/mike/bin/gd-json-ls-d-only.sh ${1}
+#
+# This can generate a lot of output
+# if you run it for lots of people.
+# Perhaps a symlink to a file system
+# with lots of storage?
+#
+
+DOMAIN="@udel.edu"
+BASE="."
+SCRIPTS="."
+SA_SCRIPTS=".."
+
+# Either '' or '-r'
+SUFFIX='-r'
+
+# You will likely want to symlink this elsewhere.
+# ie: ln -s /data/mike/gd-reports-2023-12-04 gd-reports
+
+GDREPORTS=${SCRIPTS}/gd-reports
+
+mkdir -p ${GDREPORTS}/${GDUSER}
+
+${SA_SCRIPTS}/sa${SUFFIX} ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}${SUFFIX}.json
 if [ $? -gt 0 ]; then
     echo mv ${2} ${3}/${1}.err
     mv ${2} ${3}/${1}.err
@@ -16,3 +40,6 @@ else
     echo mv ${2} ${3}
     mv ${2} ${3}
 fi
+
+#
+# End.

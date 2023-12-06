@@ -21,13 +21,14 @@ mkdir gd-reports
 ```
 
 Edit doit.sh to set your domain any any paths you need to adjust.
-Also, set if you want to run sa or sa-r.
 
-Touch files in gd-reports as so:
+Touch files in gd-run as so:
 
 ```
 touch gd-run/in/mike
 ```
+
+Use a for loop or something to save time.
 
 Then run
 
@@ -43,7 +44,9 @@ for i in `ls gd-reports`; do
 done
 ```
 
-This script runs pretty fast and uses a lot of CPU and memory, so
-I typically run it synchronously.
+This script runs pretty fast and uses a lot of CPU and memory,
+so I typically run it synchronously.  This is why it is not part
+of doit.sh.  You would not want to accidentally run 75 copies of
+the find_missing script at the same time.
 
 End.

@@ -19,7 +19,20 @@ IN='./gd-run/in'
 OUT='./gd-run/out'
 RUNNING='./gd-run/running'
 LOGS='./gd-run/logs'
-MAX=75
+
+#
+# We find that wee can easily run 75 concurrent
+# scripts, however, I am going to default to 2
+# so I don't make a mess on someone's system
+# if they run this without checking things out.
+# Besides, testing with 2 is a good start to make
+# sure paths and file systems are correct and
+# up to the task.  Note that there is bug
+# that counts the fgrep as a process, so really
+# set this to three to run two.
+#
+
+MAX=3
 
 mkdir -p ${IN}
 

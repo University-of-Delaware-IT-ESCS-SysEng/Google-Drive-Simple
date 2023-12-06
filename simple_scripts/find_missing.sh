@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 BASE="./gd-reports"
 GDUSER=${1}
 cd ${BASE}/${GDUSER}

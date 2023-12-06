@@ -22,9 +22,6 @@ BASE="."
 SCRIPTS="."
 SA_SCRIPTS=".."
 
-# Either '' or '-r'
-SUFFIX='-r'
-
 # You will likely want to symlink this elsewhere.
 # ie: ln -s /data/mike/gd-reports-2023-12-04 gd-reports
 
@@ -32,8 +29,17 @@ GDREPORTS=${SCRIPTS}/gd-reports
 
 mkdir -p ${GDREPORTS}/${GDUSER}
 
-${SA_SCRIPTS}/sa${SUFFIX} ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}${SUFFIX}.json
-if [ $? -gt 0 ]; then
+${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}.json
+RC=$?
+if [ ${RC} -gt 0 ]; then
+    echo mv ${2} ${3}/${1}.err
+    mv ${2} ${3}/${1}.err
+    exit 0
+fi
+
+${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}-r.json
+RC=$?
+if [ ${RC} -gt 0 ]; then
     echo mv ${2} ${3}/${1}.err
     mv ${2} ${3}/${1}.err
 else

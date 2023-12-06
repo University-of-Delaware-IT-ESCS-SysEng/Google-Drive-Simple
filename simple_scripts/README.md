@@ -49,4 +49,11 @@ so I typically run it synchronously.  This is why it is not part
 of doit.sh.  You would not want to accidentally run 75 copies of
 the find_missing script at the same time.
 
+Note the DATE_TO_SKIP setting.  Since this script runs sa and
+sa-r back to back, this can probably just be today's date.  But,
+if you are running a lot of users, you might get runs that span
+a day.  Big accounts can also take a long time to list.  We can
+do about 1m per hour, so if an account has more than about 24m
+files, the run for sa and sa-r will span days.
+
 End.

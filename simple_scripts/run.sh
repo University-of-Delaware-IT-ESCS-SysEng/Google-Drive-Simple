@@ -32,7 +32,7 @@ LOGS='./gd-run/logs'
 # set this to three to run two.
 #
 
-MAX=3
+MAX=120
 echo Running ${MAX} scripts in parallel.
 
 mkdir -p ${IN}

@@ -11,6 +11,7 @@ sa
 sa-r
 # We want to avoid anyone uploading json br accident.
 *.json
+*.ids
 
 # Distribution / packaging
 .Python

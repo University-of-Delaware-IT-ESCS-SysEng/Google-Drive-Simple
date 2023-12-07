@@ -108,6 +108,17 @@ Run
 ./sa-r theuser@yourschool.edu > my-r.json
 ```
 
+A new program has been added called `sa-user` which uses
+
+```
+"<account-name@school.edu>" in owners
+```
+
+When I ran this on a sample account, it did return more files, but
+by no means all.  However, I had submitted a ticket to Google by
+this point and it is reasonable to assume that Google is reindexing
+our accounts also.  I will add more information here as I get it.
+
 to get a list of files based from My Drive.  Note that this will
 include files owned by others if present.  So, you if you compare
 the file ids from './sa', you will need to exclude those with

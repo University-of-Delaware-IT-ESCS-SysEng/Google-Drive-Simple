@@ -22,17 +22,16 @@ LOGS='./gd-run/logs'
 
 #
 # We find that wee can easily run 75 concurrent
-# scripts, however, I am going to default to 2
-# so I don't make a mess on someone's system
-# if they run this without checking things out.
-# Besides, testing with 2 is a good start to make
-# sure paths and file systems are correct and
-# up to the task.  Note that there is bug
-# that counts the fgrep as a process, so really
-# set this to three to run two.
+# jobs.  However, to avoid accidental commits
+# with large run counts which could mess up someone's
+# system, I have moved the paremeter to a file.
 #
 
-MAX=120
+if [ ! -f ./job-cnt.txt ]; then
+    echo 3 > ./job-cnt.txt
+fi
+
+MAX=`cat ./job-cnt.txt`
 echo Running ${MAX} scripts in parallel.
 
 mkdir -p ${IN}

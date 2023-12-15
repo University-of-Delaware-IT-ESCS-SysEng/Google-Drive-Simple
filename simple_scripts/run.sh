@@ -48,7 +48,7 @@ while true; do
         fi
         mv ${IN}/${NEXT} ${RUNNING}/${NEXT}
         echo ${active} active, starting ${NEXT}
-        ${CMD} ${NEXT} ${RUNNING}/${NEXT} ${OUT}/ > ${LOGS}/${NEXT}.log 2>&1 &
+        ${CMD} ${NEXT} ${RUNNING}/${NEXT} ${OUT}/ >> ${LOGS}/${NEXT}.log 2>&1 &
     else
         echo ${active} active, waiting
         sleep 1

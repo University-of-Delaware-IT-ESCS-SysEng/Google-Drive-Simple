@@ -16,7 +16,7 @@ sa_r_output=`mktemp sa_r_output_XXXXXX`
 # affected accounts.
 #
 
-DATE_TO_SKIP='Time":"2023-12-1'
+DATE_TO_SKIP='Time":"2024-01-16'
 
 cut -d: -f 1 ${GDUSER}.json | sort > ${sa_output}
 fgrep '"ownedByMe":true' ${GDUSER}-r.json | \

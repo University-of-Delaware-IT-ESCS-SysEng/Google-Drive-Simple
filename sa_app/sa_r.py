@@ -34,17 +34,19 @@ def list():
         ',shortcutDetails(*)'
         ',webViewLink' )
 
-    drive_service = our_connect()
+    ( user, drive_service ) = our_connect()
 
     args = {}
     args[ 'fields' ] = 'nextPageToken,files(' + fields + ')'
     args[ 'spaces' ] = 'drive,appDataFolder'
     args[ 'pageSize' ] = 1000
 
-    print( "Basic args: %s" % args, file=sys.stderr )
+    print( "INFO: Basic args: %s" % args, file=sys.stderr )
 
     dirs = deque()
     dirs.append( 'root' )
+
+    total_size = 0
 
 #
 # Build something like ('id1' in parents or 'id2' in parents) maxed at 50.
@@ -98,6 +100,11 @@ def list():
                             separators=(',', ':') )
                 print( '' )                     # One line per file
 
+                try:
+                    total_size += int( f[ 'size' ] )
+                except ( KeyError, ValueError ):
+                    pass
+
             # End of files for loop
 
             try:
@@ -106,6 +113,8 @@ def list():
                 break
         # End of paging loop for a files().list call series on set of parents
     # End of loop that processes all located directories
+
+    print( "INFO: total bytes found: %d" % total_size, file=sys.stderr )
 
 list()      # Run the program.
 

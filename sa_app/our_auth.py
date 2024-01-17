@@ -25,6 +25,12 @@ scopes = [
 
 def our_connect():
 
+    """
+    Gets the user to connect to from sys.argv[ 1 ] and returns
+
+    ( user-account, drive_service )
+    """
+
     if not KEYS:
         flow = InstalledAppFlow.from_client_secrets_file(
             "credentials.json", scopes )
@@ -42,8 +48,8 @@ def our_connect():
         o2_credentials.authorize( http )
         drive_service = build( 'drive', 'v3', http=http )
 
-        print( "Connected with user %s" % USER, file=sys.stderr )
+        print( "INFO: Connected with user %s" % USER, file=sys.stderr )
 
-    return( drive_service )
+    return( ( USER, drive_service ) )
 
 # End.

@@ -28,15 +28,17 @@ def list():
         ',shortcutDetails(*)'
         ',webViewLink' )
 
-    drive_service = our_connect()
+    ( user, drive_service ) = our_connect()
 
     args = {}
-    args[ 'q' ] = '"me" in owners'
+    args[ 'q' ] = '"%s" in owners' % user
     args[ 'fields' ] = 'nextPageToken,files(' + fields + ')'
     args[ 'spaces' ] = 'drive,appDataFolder'
     args[ 'pageSize' ] = 1000
 
-    print( "Basic args: %s" % args, file=sys.stderr )
+    print( "INFO: Basic args: %s" % args, file=sys.stderr )
+
+    total_size = 0
 
     while True:
         while True:
@@ -63,10 +65,17 @@ def list():
                         separators=(',', ':') )
             print( '' )                     # One line per file
 
+            try:
+                total_size += int( f[ 'size' ] )
+            except ( KeyError, ValueError ):
+                pass
+
         try:
             args[ 'pageToken' ] = v[ 'nextPageToken' ]
         except KeyError:
             break
+
+    print( "INFO: total bytes found: %d" % total_size, file=sys.stderr )
 
 list()
 

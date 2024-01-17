@@ -75,7 +75,8 @@ def list():
         except KeyError:
             break
 
-    print( "INFO: total bytes found: %d" % total_size, file=sys.stderr )
+    print( "INFO: total bytes found: %s %d" % ( user, total_size ),
+        file=sys.stderr )
 
 list()
 

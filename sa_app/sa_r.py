@@ -114,7 +114,8 @@ def list():
         # End of paging loop for a files().list call series on set of parents
     # End of loop that processes all located directories
 
-    print( "INFO: total bytes found: %d" % total_size, file=sys.stderr )
+    print( "INFO: total bytes found: %s %d" % ( user, total_size ),
+        file=sys.stderr )
 
 list()      # Run the program.
 

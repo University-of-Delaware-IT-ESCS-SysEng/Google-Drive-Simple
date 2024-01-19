@@ -136,6 +136,20 @@ We want to find computer backups which are not rooted from **My
 Drive** and files in folders owned by other users that are not
 on this user's path from **My Drive**.
 
+## Total Space
+
+We now report the total space found.  I also added the total
+in MiB, TiB, etc because the admin console actually reports
+in these units.  The reports that we can pull from the API use
+units of 'mb', but are actually 'MiB', so keep that in mind when
+comparing results from these programs to other data sources.
+MiB is always printed to aid in comparing to the reports, no
+matter how much space is used, along with the closest unit.
+
+Additionally, I have switched from 'size' to 'quotaBytesUsed'.
+It is hard to know what the admin console is reporting, but
+generally I think this is a more useful number.
+
 ## Errors
 
 ### Non 500 Errors

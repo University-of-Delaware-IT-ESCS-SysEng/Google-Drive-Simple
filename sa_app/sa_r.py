@@ -12,6 +12,7 @@ from googleapiclient import errors
 import googleapiclient
 
 from sa_app.our_auth import our_connect
+from sa_app.util import iB
 import sa_app.error
 
 _FOLDER_MT = 'application/vnd.google-apps.folder'
@@ -30,7 +31,7 @@ def list():
         ',modifiedByMeTime'
         ',trashingUser(emailAddress)'
         ',trashedTime'
-        ',size'
+        ',quotaBytesUsed'
         ',shortcutDetails(*)'
         ',webViewLink' )
 
@@ -101,7 +102,7 @@ def list():
                 print( '' )                     # One line per file
 
                 try:
-                    total_size += int( f[ 'size' ] )
+                    total_size += int( f[ 'quotaBytesUsed' ] )
                 except ( KeyError, ValueError ):
                     pass
 
@@ -114,7 +115,8 @@ def list():
         # End of paging loop for a files().list call series on set of parents
     # End of loop that processes all located directories
 
-    print( "INFO: total bytes found: %s %d" % ( user, total_size ),
+    print( "INFO: quota bytes used found: %s %d (%s) (%s)" %
+        ( user, total_size, iB( total_size ), iB( total_size, force_mib=True )),
         file=sys.stderr )
 
 list()      # Run the program.

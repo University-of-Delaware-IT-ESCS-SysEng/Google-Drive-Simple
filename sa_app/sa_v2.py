@@ -16,7 +16,7 @@ import sa_app.error
 def list():
 
     fields = ( 'mimeType,id,title,explicitlyTrashed'
-        ',parents'
+        ',parents(id)'
         ',md5Checksum'
         ',sharingUser(permissionId,emailAddress)'
         ',shared'
@@ -55,7 +55,6 @@ def list():
                     print( "ERROR: Retrying args %s" % args, file=sys.stderr )
                     pass            # Will redo the same call with same args
 
-        pprint.pprint( v )
         for f in v[ 'items' ]:
 
             # Makes working with Unix text tools easy

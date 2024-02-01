@@ -23,7 +23,7 @@ scopes = [
     'https://www.googleapis.com/auth/drive.appdata'
 ]
 
-def our_connect():
+def our_connect( version='v3' ):
 
     """
     Gets the user to connect to from sys.argv[ 1 ] and returns
@@ -46,9 +46,10 @@ def our_connect():
 
         http = httplib2.Http()
         o2_credentials.authorize( http )
-        drive_service = build( 'drive', 'v3', http=http )
+        drive_service = build( 'drive', version, http=http )
 
-        print( "INFO: Connected with user %s" % USER, file=sys.stderr )
+        print( "INFO: Connected using version %s with user %s" %
+            ( version, USER ), file=sys.stderr )
 
     return( ( USER, drive_service ) )
 

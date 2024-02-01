@@ -1,0 +1,2 @@
+#!/bin/bash
+env PYTHONPATH=/home/mike/src/Google-Drive-Simple /home/mike/src/Google-Drive-Simple/env/bin/python -m sa_app.sa_v2 $*

@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+# Attempt at using the change.list method to find files.  Currently it finds nothing.
+env PYTHONPATH=/home/mike/src/Google-Drive-Simple /home/mike/src/Google-Drive-Simple/env/bin/python -m sa_app.sa_changes $*

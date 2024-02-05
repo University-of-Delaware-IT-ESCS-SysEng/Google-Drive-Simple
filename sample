@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# This code runs the sample module copied almost verbatim
+# from page https://developers.google.com/drive/api/guides/manage-changes.
+# The code uses my authorization code, but other than that, it is
+# the sample.  The starting page token is hardcoded to my id.
+# No changes are ever returned.  I don't know why.
+env PYTHONPATH=/home/mike/src/Google-Drive-Simple /home/mike/src/Google-Drive-Simple/env/bin/python -m sa_app.changes_sample $*

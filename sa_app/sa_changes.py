@@ -33,23 +33,17 @@ def list():
     ( user, drive_service ) = our_connect()
 
 #
-# We'll just let this call run without error handling.
-# Most likely if it fails we want to abort the entire
-# run anyhow.
+# If you want all changes, start with page 1.
 #
 
-    args = {}
-    v = drive_service.changes().getStartPageToken().execute()
-    startPageToken = v[ 'startPageToken' ]
-
-    print( 'INFO: getStartPageToken returned %s' % startPageToken )
+    startPageToken = 1
 
     args = {}
-#    args[ 'includeCorpusRemovals' ] = 'true'
-#    args[ 'includeRemoved' ] = 'false'
+    args[ 'includeCorpusRemovals' ] = 'true'
+    args[ 'includeRemoved' ] = 'false'
     args[ 'fields' ] = 'nextPageToken,newStartPageToken,changes(file(' + fields + '))'
     args[ 'spaces' ] = 'drive'
-#    args[ 'pageSize' ] = 1000
+    args[ 'pageSize' ] = 1000
     args[ 'pageToken' ] = startPageToken
 
     print( "INFO: Basic args: %s" % args, file=sys.stderr )
@@ -69,7 +63,6 @@ def list():
                     print( "ERROR: Retrying args %s" % args, file=sys.stderr )
                     pass            # Will redo the same call with same args
 
-        pprint.pprint( v )
         for c in v[ 'changes' ]:
 
             # Makes working with Unix text tools easy

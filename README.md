@@ -23,6 +23,12 @@ yet.
 
 We had to add an error handler.  See below.
 
+Google has suggested that the drive api call changes().list()
+can be used to find all files a user owns.  This might be true.
+See program sa-changes in the scripts directory.  Initial testing
+has shown that this does work, but it can be much slower.
+It depends a lot on what the shared history of the account is.
+
 ## Downloading
 
 Download like you would any git repository.

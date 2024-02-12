@@ -30,29 +30,49 @@ GDREPORTS=${SCRIPTS}/gd-reports
 
 mkdir -p ${GDREPORTS}/${GDUSER}
 
-echo Start command ${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN}
-${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}.json
-RC=$?
-echo Finished command ${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN}
-date
-if [ ${RC} -gt 0 ]; then
-    echo ERROR: Received error code ${RC}
-    echo mv ${2} ${3}/${1}.err
-    mv ${2} ${3}/${1}.err
+if [ 0 -ne 0 ]; then
+    echo Start command ${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN}
+    ${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}.json
+    RC=$?
+    echo Finished command ${SA_SCRIPTS}/sa ${GDUSER}${DOMAIN}
+    date
+    if [ ${RC} -gt 0 ]; then
+        echo ERROR: Received error code ${RC}
+        echo mv ${2} ${3}/${1}.err
+        mv ${2} ${3}/${1}.err
+    fi
 fi
 
-echo Starting command ${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN}
-${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}-r.json
-RC=$?
-echo Finished command ${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN}
-date
-if [ ${RC} -gt 0 ]; then
-    echo ERROR: Received error code ${RC}
-    echo mv ${2} ${3}/${1}.err
-    mv ${2} ${3}/${1}.err
-else
-    echo mv ${2} ${3}
-    mv ${2} ${3}
+if [ 0 -ne 0 ]; then
+    echo Starting command ${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN}
+    ${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}-r.json
+    RC=$?
+    echo Finished command ${SA_SCRIPTS}/sa-r ${GDUSER}${DOMAIN}
+    date
+    if [ ${RC} -gt 0 ]; then
+        echo ERROR: Received error code ${RC}
+        echo mv ${2} ${3}/${1}.err
+        mv ${2} ${3}/${1}.err
+    else
+        echo mv ${2} ${3}
+        mv ${2} ${3}
+    fi
+fi
+
+if [ 1 -ne 0 ]; then
+    echo Starting command ${SA_SCRIPTS}/sa-changes ${GDUSER}${DOMAIN}
+    ${SA_SCRIPTS}/sa-changes ${GDUSER}${DOMAIN} > ${GDREPORTS}/${GDUSER}/${GDUSER}-c.json
+    RC=$?
+    echo Finished command ${SA_SCRIPTS}/sa-changes ${GDUSER}${DOMAIN}
+    date
+    if [ ${RC} -gt 0 ]; then
+        echo ERROR: Received error code ${RC}
+        echo mv ${2} ${3}/${1}.err
+        mv ${2} ${3}/${1}.err
+    else
+        echo mv ${2} ${3}
+        mv ${2} ${3}
+    fi
 fi
 
 echo Finished with user ${GDUSER}
